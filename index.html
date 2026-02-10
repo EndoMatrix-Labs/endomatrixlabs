@@ -1,155 +1,604 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>EndoMatrix Labs — A living model for lifelong hormonal health</title>
-  <meta name="description" content="EndoMatrix Labs is building a science-driven endocrine intelligence layer to support lifelong hormonal health." />
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
+import React from "react";
+import { motion } from "framer-motion";
+import {
+  Activity,
+  ArrowRight,
+  BookOpen,
+  HeartPulse,
+  LineChart,
+  Mail,
+  Menu,
+  Shield,
+  Users,
+} from "lucide-react";
 
-  <header class="hero">
-    <div class="container">
-      <h1>EndoMatrix Labs</h1>
-      <p class="tagline">A living model for lifelong hormonal health</p>
-      <p class="hero-sub">
-        We are building hormone-aware intelligence to support adaptive daily living
-        across every stage of a woman’s life.
-      </p>
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
-      <form class="waitlist" action="#" method="post">
-        <input type="email" placeholder="Your email address" required />
-        <button type="submit">Join early access</button>
-      </form>
+const nav = [
+  { label: "Products", href: "#products" },
+  { label: "About", href: "#about" },
+  { label: "Blog", href: "#blog" },
+  { label: "Contact", href: "#contact" },
+];
 
-      <p class="note">
-        We will only use your email for updates. No spam.
-      </p>
+const products = [
+  {
+    name: "Sentinel",
+    tagline: "Population early warning",
+    description:
+      "Endocrine intelligence for anticipatory care. Turns longitudinal proxy signals into cohort-level early warnings and actionable decision support.",
+    bullets: [
+      "Hybrid sensing: SMS/USSD + optional wearables",
+      "Privacy-preserving aggregation and alerts",
+      "Built for low-resource deployment",
+    ],
+    icon: LineChart,
+    cta: { label: "Explore Sentinel", href: "#contact" },
+  },
+  {
+    name: "Core",
+    tagline: "Personal endocrine insights",
+    description:
+      "A low-burden daily and weekly logging experience that learns personal baselines and produces interpretable summaries women can use in real life and clinical visits.",
+    bullets: [
+      "Cycle and symptom logging that works offline-first",
+      "Personal baselines, not generic averages",
+      "Clinic-ready summaries and red-flag prompts",
+    ],
+    icon: HeartPulse,
+    cta: { label: "See how it works", href: "#about" },
+  },
+  {
+    name: "Care Pathways",
+    tagline: "Action, not dashboards",
+    description:
+      "Workflow-ready outputs for primary care and community health networks that prioritize follow-up and support low-cost prevention before complications escalate.",
+    bullets: [
+      "Follow-up prioritization and outreach lists",
+      "Interpretable early warning flags",
+      "Designed to align with existing care workflows",
+    ],
+    icon: Users,
+    cta: { label: "Partner with us", href: "#contact" },
+  },
+];
+
+const posts = [
+  {
+    title: "Why endocrine intelligence matters for anticipatory health",
+    desc: "How longitudinal hormonal proxy signals can surface risk earlier in the disease trajectory.",
+    tag: "Explainer",
+  },
+  {
+    title: "Hybrid sensing in low-resource settings",
+    desc: "Designing for SMS/USSD first, then adding high-resolution signals where available.",
+    tag: "Implementation",
+  },
+  {
+    title: "Privacy, trust, and women-first health data",
+    desc: "Practical safeguards that make sensing useful without becoming surveillance.",
+    tag: "Ethics",
+  },
+];
+
+function Logo() {
+  return (
+    <div className="flex items-center gap-2">
+      <div
+        className="h-9 w-9 rounded-xl bg-gradient-to-br from-emerald-500/90 to-cyan-500/90"
+        aria-hidden="true"
+      />
+      <div className="leading-tight">
+        <div className="text-sm font-semibold">EndoMatrix Labs</div>
+        <div className="text-xs text-muted-foreground">Endocrine intelligence</div>
+      </div>
     </div>
-  </header>
+  );
+}
 
-  <main>
-
-    <section class="section">
-      <div class="container">
-        <h2>The challenge</h2>
-        <p>
-          Hormonal health is often reduced to menstrual tracking, despite hormones
-          shaping energy, mood, skin, metabolism, cognition, and wellbeing across a
-          woman’s entire life.
-        </p>
-        <p>
-          Most women receive fragmented information, late diagnoses, or dismissal of
-          symptoms that are deeply connected to endocrine change.
-        </p>
+function SectionTitle({
+  eyebrow,
+  title,
+  subtitle,
+}: {
+  eyebrow: string;
+  title: string;
+  subtitle?: string;
+}) {
+  return (
+    <div className="max-w-2xl">
+      <div className="text-xs font-medium tracking-wide text-emerald-700 dark:text-emerald-300">
+        {eyebrow}
       </div>
-    </section>
-
-    <section class="section muted">
-      <div class="container">
-        <h2>Our mission</h2>
-        <p>
-          To empower women with hormone-aware intelligence that supports informed,
-          adaptive daily living across all life stages.
-        </p>
-
-        <h2>Our vision</h2>
-        <p>
-          A future where every woman has personalized endocrine insight that evolves
-          with her body and supports better health outcomes over time.
-        </p>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container">
-        <h2>EndoMatrix Core</h2>
-        <p>
-          EndoMatrix Core is a personalized, phase-aware intelligence layer that
-          connects hormonal context to everyday decisions.
-        </p>
-
-        <ul class="features">
-          <li>Hormonal phase modeling across cycles and life stages</li>
-          <li>Symptom-aware insight grounded in longitudinal data</li>
-          <li>Daily lifestyle guidance aligned with endocrine context</li>
-          <li>Continuous learning as the body changes over time</li>
-        </ul>
-
-        <p class="disclaimer">
-          EndoMatrix Core is not a diagnostic tool and does not replace medical care.
-        </p>
-      </div>
-    </section>
-
-    <section class="section muted">
-      <div class="container">
-        <h2>The endocrine digital twin</h2>
-        <p>
-          Our long-term vision is a living endocrine digital twin — a continuously
-          evolving model that reflects how an individual’s hormonal system changes
-          across life.
-        </p>
-        <p>
-          This model is designed to support understanding, not diagnosis, and to act
-          as a bridge between lived experience and clinical care.
-        </p>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container">
-        <h2>Scientific & ethical foundation</h2>
-        <ul class="features">
-          <li>Hormonal change is continuous, not episodic</li>
-          <li>Context and timing matter</li>
-          <li>Understanding precedes intervention</li>
-          <li>Clear boundaries between insight and diagnosis</li>
-        </ul>
-      </div>
-    </section>
-
-    <section class="section muted">
-      <div class="container">
-        <h2>Working alongside healthcare professionals</h2>
-        <p>
-          EndoMatrix Labs is built to complement clinical care, working alongside
-          endocrinologists, dermatologists, nutritionists, physiologists, and women’s
-          health specialists.
-        </p>
-        <p>
-          Our focus is longitudinal context and patient-reported insight, supporting
-          better-informed conversations between individuals and clinicians.
-        </p>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container">
-        <h2>Our roadmap</h2>
-        <ul class="features">
-          <li>Phase 1: EndoMatrix Core</li>
-          <li>Phase 2: Endocrine Digital Twin</li>
-          <li>Phase 3: Ecosystem expansion and research partnerships</li>
-        </ul>
-      </div>
-    </section>
-
-  </main>
-
-  <footer>
-    <div class="container">
-      <p>© EndoMatrix Labs</p>
-      <p>
-        <a href="mailto:info@endomatrixlabs.tech">info@endomatrixlabs.tech</a>
-      </p>
-      <p class="disclaimer">
-        EndoMatrix Labs does not provide medical advice or diagnosis.
-      </p>
+      <h2 className="mt-2 text-2xl font-semibold tracking-tight sm:text-3xl">
+        {title}
+      </h2>
+      {subtitle ? (
+        <p className="mt-3 text-sm text-muted-foreground sm:text-base">{subtitle}</p>
+      ) : null}
     </div>
-  </footer>
+  );
+}
 
-</body>
-</html>
+export default function EndoMatrixLabsLanding() {
+  return (
+    <div className="min-h-screen bg-background text-foreground">
+      {/* Top bar */}
+      <header className="sticky top-0 z-50 border-b bg-background/80 backdrop-blur">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
+          <a href="#" className="focus:outline-none focus:ring-2 focus:ring-emerald-500 rounded-lg">
+            <Logo />
+          </a>
+
+          <nav className="hidden items-center gap-6 md:flex" aria-label="Primary">
+            {nav.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              >
+                {item.label}
+              </a>
+            ))}
+            <Button asChild size="sm" className="rounded-xl">
+              <a href="#contact">
+                Talk to us <ArrowRight className="ml-2 h-4 w-4" />
+              </a>
+            </Button>
+          </nav>
+
+          <div className="md:hidden">
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button variant="outline" size="icon" className="rounded-xl" aria-label="Open menu">
+                  <Menu className="h-5 w-5" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right" className="w-[320px]">
+                <div className="mt-2">
+                  <Logo />
+                  <Separator className="my-4" />
+                  <div className="flex flex-col gap-3">
+                    {nav.map((item) => (
+                      <a
+                        key={item.href}
+                        href={item.href}
+                        className="text-sm text-muted-foreground hover:text-foreground"
+                      >
+                        {item.label}
+                      </a>
+                    ))}
+                    <Separator className="my-2" />
+                    <Button asChild className="rounded-xl">
+                      <a href="#contact">Talk to us</a>
+                    </Button>
+                  </div>
+                </div>
+              </SheetContent>
+            </Sheet>
+          </div>
+        </div>
+      </header>
+
+      {/* Hero */}
+      <main>
+        <section className="relative overflow-hidden">
+          <div className="absolute inset-0 -z-10">
+            <div className="absolute left-[-10%] top-[-20%] h-[420px] w-[420px] rounded-full bg-emerald-500/15 blur-3xl" />
+            <div className="absolute right-[-10%] top-[10%] h-[480px] w-[480px] rounded-full bg-cyan-500/15 blur-3xl" />
+          </div>
+
+          <div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-4 py-14 sm:px-6 sm:py-20 lg:grid-cols-2 lg:items-center">
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="max-w-xl"
+            >
+              <Badge className="rounded-full" variant="secondary">
+                Women-first pilot. Population-ready platform.
+              </Badge>
+              <h1 className="mt-4 text-3xl font-semibold tracking-tight sm:text-5xl">
+                Endocrine intelligence for anticipatory health
+              </h1>
+              <p className="mt-4 text-sm text-muted-foreground sm:text-base">
+                EndoMatrix Labs builds hormone-aware sensing and decision support systems that turn longitudinal signals
+                into interpretable early warnings. Start with women, then expand to broader populations as evidence and
+                partnerships grow.
+              </p>
+
+              <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+                <Button asChild className="rounded-xl">
+                  <a href="#products">
+                    Explore products <ArrowRight className="ml-2 h-4 w-4" />
+                  </a>
+                </Button>
+                <Button asChild variant="outline" className="rounded-xl">
+                  <a href="#about">How we work</a>
+                </Button>
+              </div>
+
+              <div className="mt-8 flex flex-wrap gap-3 text-xs text-muted-foreground">
+                <div className="inline-flex items-center gap-2 rounded-full border px-3 py-1">
+                  <Shield className="h-4 w-4" /> Privacy-by-design
+                </div>
+                <div className="inline-flex items-center gap-2 rounded-full border px-3 py-1">
+                  <Activity className="h-4 w-4" /> Hybrid sensing (USSD + wearables)
+                </div>
+                <div className="inline-flex items-center gap-2 rounded-full border px-3 py-1">
+                  <LineChart className="h-4 w-4" /> Interpretable drift signals
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.05 }}
+              className="lg:justify-self-end"
+            >
+              <Card className="rounded-3xl shadow-sm">
+                <CardHeader>
+                  <CardTitle className="text-lg">From signals to action</CardTitle>
+                  <CardDescription>
+                    A simple, operational view of how Sentinel turns longitudinal inputs into anticipatory care.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid gap-3">
+                    <div className="rounded-2xl border p-4">
+                      <div className="flex items-center gap-2 text-sm font-medium">
+                        <Activity className="h-4 w-4 text-emerald-600" /> Sensing
+                      </div>
+                      <p className="mt-1 text-xs text-muted-foreground">
+                        SMS/USSD check-ins for inclusion, plus optional wearable and biosensing proxies.
+                      </p>
+                    </div>
+                    <div className="rounded-2xl border p-4">
+                      <div className="flex items-center gap-2 text-sm font-medium">
+                        <LineChart className="h-4 w-4 text-emerald-600" /> Intelligence
+                      </div>
+                      <p className="mt-1 text-xs text-muted-foreground">
+                        Personal baselines that detect meaningful drift, not generic averages.
+                      </p>
+                    </div>
+                    <div className="rounded-2xl border p-4">
+                      <div className="flex items-center gap-2 text-sm font-medium">
+                        <Users className="h-4 w-4 text-emerald-600" /> Action
+                      </div>
+                      <p className="mt-1 text-xs text-muted-foreground">
+                        Interpretable early warning outputs that support follow-up and low-cost prevention.
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Products */}
+        <section id="products" className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
+          <SectionTitle
+            eyebrow="Products"
+            title="A portfolio built to last"
+            subtitle="EndoMatrix Labs is a platform company. Sentinel is one product, designed to coexist with others across women’s health and preventive care."
+          />
+
+          <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-3">
+            {products.map((p) => {
+              const Icon = p.icon;
+              return (
+                <Card key={p.name} className="rounded-3xl">
+                  <CardHeader>
+                    <div className="flex items-start justify-between gap-4">
+                      <div>
+                        <CardTitle className="text-lg">{p.name}</CardTitle>
+                        <CardDescription className="mt-1">{p.tagline}</CardDescription>
+                      </div>
+                      <div className="rounded-2xl border p-2" aria-hidden="true">
+                        <Icon className="h-5 w-5" />
+                      </div>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-muted-foreground">{p.description}</p>
+                    <ul className="mt-4 space-y-2 text-sm">
+                      {p.bullets.map((b) => (
+                        <li key={b} className="flex gap-2">
+                          <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-500" />
+                          <span className="text-muted-foreground">{b}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <div className="mt-6">
+                      <Button asChild variant="outline" className="w-full rounded-xl">
+                        <a href={p.cta.href}>
+                          {p.cta.label} <ArrowRight className="ml-2 h-4 w-4" />
+                        </a>
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* Mission & Vision */}
+        <section id="about" className="border-y bg-muted/30">
+          <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
+            <SectionTitle
+              eyebrow="About"
+              title="Mission and vision"
+              subtitle="We build endocrine intelligence systems that help people and health systems act earlier, with dignity and trust."
+            />
+
+            <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-2">
+              <Card className="rounded-3xl">
+                <CardHeader>
+                  <CardTitle>Mission</CardTitle>
+                  <CardDescription>What we do, day to day.</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-3 text-sm">
+                    <li className="flex gap-3">
+                      <span className="mt-1 rounded-xl border p-2" aria-hidden="true">
+                        <Activity className="h-4 w-4" />
+                      </span>
+                      <div>
+                        <div className="font-medium">Capture meaningful signals</div>
+                        <div className="text-muted-foreground">
+                          Hybrid sensing that works on basic phones and improves with optional high-resolution streams.
+                        </div>
+                      </div>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="mt-1 rounded-xl border p-2" aria-hidden="true">
+                        <LineChart className="h-4 w-4" />
+                      </span>
+                      <div>
+                        <div className="font-medium">Turn data into interpretable insight</div>
+                        <div className="text-muted-foreground">
+                          Personal baselines and drift detection that support decisions, not black-box predictions.
+                        </div>
+                      </div>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="mt-1 rounded-xl border p-2" aria-hidden="true">
+                        <Users className="h-4 w-4" />
+                      </span>
+                      <div>
+                        <div className="font-medium">Connect insight to action</div>
+                        <div className="text-muted-foreground">
+                          Workflow-ready outputs that prioritize follow-up and prevention in primary care and community networks.
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </CardContent>
+              </Card>
+
+              <Card className="rounded-3xl">
+                <CardHeader>
+                  <CardTitle>Vision</CardTitle>
+                  <CardDescription>Where we are going.</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-muted-foreground">
+                    A world where endocrine transitions are not dismissed, and where early physiological drift becomes a
+                    trusted signal for prevention. We start with women because cyclical and life-stage endocrine transitions
+                    create clear longitudinal patterns and a major data gap, then expand to broader populations as evidence
+                    and partnerships grow.
+                  </p>
+
+                  <div className="mt-6 grid gap-3 sm:grid-cols-2">
+                    <div className="rounded-2xl border p-4">
+                      <div className="flex items-center gap-2 text-sm font-medium">
+                        <Shield className="h-4 w-4 text-emerald-600" /> Trust
+                      </div>
+                      <p className="mt-1 text-xs text-muted-foreground">
+                        Consent, minimization, and privacy-preserving aggregation by default.
+                      </p>
+                    </div>
+                    <div className="rounded-2xl border p-4">
+                      <div className="flex items-center gap-2 text-sm font-medium">
+                        <BookOpen className="h-4 w-4 text-emerald-600" /> Clarity
+                      </div>
+                      <p className="mt-1 text-xs text-muted-foreground">
+                        Outputs designed to be understood by users, clinicians, and decision-makers.
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
+
+        {/* Blog */}
+        <section id="blog" className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
+          <SectionTitle
+            eyebrow="Blog"
+            title="Notes from the lab"
+            subtitle="Short, practical writing on endocrine intelligence, women-first sensing, and implementation in low-resource settings."
+          />
+
+          <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-3">
+            {posts.map((p) => (
+              <Card key={p.title} className="rounded-3xl">
+                <CardHeader>
+                  <div className="flex items-center justify-between gap-3">
+                    <Badge variant="secondary" className="rounded-full">
+                      {p.tag}
+                    </Badge>
+                    <BookOpen className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
+                  </div>
+                  <CardTitle className="mt-3 text-base">{p.title}</CardTitle>
+                  <CardDescription>{p.desc}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <Button variant="outline" className="w-full rounded-xl" disabled>
+                    Coming soon
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </section>
+
+        {/* Contact */}
+        <section id="contact" className="border-t bg-muted/30">
+          <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
+            <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
+              <div>
+                <SectionTitle
+                  eyebrow="Contact"
+                  title="Let’s build anticipatory care that works"
+                  subtitle="If you work in primary care, public health, insurance, research, or sensing hardware, we would love to hear from you."
+                />
+
+                <div className="mt-6 space-y-3 text-sm text-muted-foreground">
+                  <div className="flex items-center gap-2">
+                    <Mail className="h-4 w-4" />
+                    <span>Email: hello@endomatrixlabs.tech</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Shield className="h-4 w-4" />
+                    <span>We do not offer accounts or logins on this site.</span>
+                  </div>
+                </div>
+              </div>
+
+              <Card className="rounded-3xl">
+                <CardHeader>
+                  <CardTitle>Partnership interests</CardTitle>
+                  <CardDescription>
+                    Pick a starting point. We will respond with a short plan and next steps.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid gap-3">
+                    <Button variant="outline" className="justify-between rounded-xl" asChild>
+                      <a href="mailto:hello@endomatrixlabs.tech?subject=Pilot%20partner%20for%20Sentinel">
+                        Pilot partner (clinic or county program)
+                        <ArrowRight className="h-4 w-4" />
+                      </a>
+                    </Button>
+                    <Button variant="outline" className="justify-between rounded-xl" asChild>
+                      <a href="mailto:hello@endomatrixlabs.tech?subject=Payer%20or%20insurer%20prevention%20program">
+                        Payer or insurer prevention program
+                        <ArrowRight className="h-4 w-4" />
+                      </a>
+                    </Button>
+                    <Button variant="outline" className="justify-between rounded-xl" asChild>
+                      <a href="mailto:hello@endomatrixlabs.tech?subject=Hardware%20or%20sensor%20integration%20partnership">
+                        Hardware or sensor integration
+                        <ArrowRight className="h-4 w-4" />
+                      </a>
+                    </Button>
+                    <Button className="justify-between rounded-xl" asChild>
+                      <a href="mailto:hello@endomatrixlabs.tech?subject=General%20inquiry">
+                        General inquiry
+                        <ArrowRight className="h-4 w-4" />
+                      </a>
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      {/* Footer */}
+      <footer className="border-t">
+        <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
+          <div className="flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between">
+            <div>
+              <Logo />
+              <p className="mt-3 max-w-sm text-sm text-muted-foreground">
+                EndoMatrix Labs builds hormone-aware sensing and decision support systems for anticipatory health.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-2 gap-8 text-sm sm:grid-cols-3">
+              <div>
+                <div className="font-medium">Company</div>
+                <ul className="mt-3 space-y-2 text-muted-foreground">
+                  <li>
+                    <a className="hover:text-foreground" href="#about">
+                      About
+                    </a>
+                  </li>
+                  <li>
+                    <a className="hover:text-foreground" href="#blog">
+                      Blog
+                    </a>
+                  </li>
+                  <li>
+                    <a className="hover:text-foreground" href="#contact">
+                      Contact
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <div className="font-medium">Products</div>
+                <ul className="mt-3 space-y-2 text-muted-foreground">
+                  <li>
+                    <a className="hover:text-foreground" href="#products">
+                      Sentinel
+                    </a>
+                  </li>
+                  <li>
+                    <a className="hover:text-foreground" href="#products">
+                      Core
+                    </a>
+                  </li>
+                  <li>
+                    <a className="hover:text-foreground" href="#products">
+                      Care Pathways
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <div className="font-medium">Legal</div>
+                <ul className="mt-3 space-y-2 text-muted-foreground">
+                  <li>
+                    <a className="hover:text-foreground" href="#">
+                      Privacy
+                    </a>
+                  </li>
+                  <li>
+                    <a className="hover:text-foreground" href="#">
+                      Terms
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <Separator className="my-8" />
+          <div className="flex flex-col gap-2 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
+            <span>© {new Date().getFullYear()} EndoMatrix Labs. All rights reserved.</span>
+            <span>Built for mobile-first access. No accounts on this site.</span>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
 
