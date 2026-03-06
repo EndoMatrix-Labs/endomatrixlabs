@@ -1,947 +1,617 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>EndoMatrix Labs — Endocrine intelligence for anticipatory health</title>
-    <meta
-      name="description"
-      content="EndoMatrix Labs builds hormone-aware sensing and decision support systems that turn longitudinal signals into interpretable early warnings for prevention and planning."
-    />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EndoMatrix Labs — Endocrine Intelligence for Women's Health</title>
+  <meta name="description" content="EndoMatrix Labs builds hormone-aware sensing and decision support systems that turn longitudinal signals into interpretable early warnings for prevention and planning." />
+  <meta property="og:title" content="EndoMatrix Labs" />
+  <meta property="og:description" content="Endocrine intelligence for anticipatory health. Women-first pilot. Population-ready platform." />
+  <meta property="og:type" content="website" />
 
-    <!-- Social preview (optional) -->
-    <meta property="og:title" content="EndoMatrix Labs" />
-    <meta
-      property="og:description"
-      content="Endocrine intelligence for anticipatory health. Women-first pilot. Population-ready platform."
-    />
-    <meta property="og:type" content="website" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cdefs%3E%3ClinearGradient id='a' x1='4' y1='0' x2='44' y2='48' gradientUnits='userSpaceOnUse'%3E%3Cstop stop-color='%23E8186D'/%3E%3Cstop offset='1' stop-color='%2300C9A7'/%3E%3C/linearGradient%3E%3ClinearGradient id='b' x1='4' y1='24' x2='44' y2='24' gradientUnits='userSpaceOnUse'%3E%3Cstop stop-color='%23E8186D'/%3E%3Cstop offset='1' stop-color='%2300C9A7'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M38 33A18 18 0 1 0 38 15' stroke='url(%23a)' stroke-width='3' stroke-linecap='round' fill='none'/%3E%3Cpath d='M11 27L16 22L21 25L26 19L31 23L36 17' stroke='url(%23b)' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3Ccircle cx='36' cy='17' r='4' fill='%2300C9A7'/%3E%3C/svg%3E" />
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=Inter:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet" />
 
-    <style>
-      :root {
-        --bg: #0b1220;
-        --surface: #0f172a;
-        --card: #111c33;
-        --soft: #1b2742;
-        --border: #26324b;
+  <style>
+    :root {
+      --ink:    #07111E;
+      --deep:   #0C1A2E;
+      --panel:  #101F35;
+      --rim:    rgba(255,255,255,0.07);
+      --pink:   #E8186D;
+      --pink-d: #c41059;
+      --teal:   #00C9A7;
+      --gold:   #F2B84B;
+      --white:  #F9F6F3;
+      --mist:   rgba(249,246,243,0.55);
+      --ghost:  rgba(249,246,243,0.28);
+      --serif:  "DM Serif Display", Georgia, serif;
+      --sans:   "DM Sans", system-ui, sans-serif;
+      --r-sm:   10px;
+      --r-md:   18px;
+      --r-lg:   28px;
+      --shadow: 0 24px 64px rgba(0,0,0,0.45);
+      --maxw:   1100px;
+      --ease:   cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); background: var(--ink); color: var(--white); line-height: 1.65; overflow-x: hidden; }
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(100% - 40px, var(--maxw)); margin-inline: auto; }
 
-        --text: #f8fafc;
-        --muted: #a7b0c0;
+    /* Header */
+    .header { position: sticky; top: 0; z-index: 200; border-bottom: 1px solid var(--rim); background: rgba(7,17,30,0.82); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); }
+    .nav-row { display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 16px; }
+    .brand { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+    .brand-mark { width: 40px; height: 40px; flex-shrink: 0; }
+    .brand-text { display: flex; flex-direction: column; line-height: 1.15; }
+    .brand-name { font-family: var(--serif); font-size: 17px; letter-spacing: -0.01em; }
+    .brand-tagline { font-size: 11px; font-weight: 400; color: var(--mist); letter-spacing: 0.04em; text-transform: uppercase; }
+    .nav-links { display: none; align-items: center; gap: 28px; }
+    .nav-links a { font-size: 14px; color: var(--mist); transition: color 0.15s; }
+    .nav-links a:hover { color: var(--white); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 40px; padding: 0 18px; border-radius: var(--r-sm); font-family: var(--sans); font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.18s var(--ease); border: none; white-space: nowrap; }
+    .btn-pink { background: var(--pink); color: #fff; }
+    .btn-pink:hover { background: var(--pink-d); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(232,24,109,0.35); }
+    .btn-ghost { background: transparent; color: var(--white); border: 1px solid var(--rim); }
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.22); background: rgba(255,255,255,0.05); }
+    .menu-btn { display: flex; flex-direction: column; gap: 5px; width: 36px; height: 36px; align-items: center; justify-content: center; background: transparent; border: 1px solid var(--rim); border-radius: var(--r-sm); cursor: pointer; flex-shrink: 0; }
+    .menu-btn span { display: block; width: 16px; height: 1.5px; background: var(--white); border-radius: 2px; transition: all 0.2s; }
+    .menu-btn.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 4px); }
+    .menu-btn.open span:nth-child(2) { opacity: 0; }
+    .menu-btn.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -4px); }
+    .mobile-nav { display: none; border-top: 1px solid var(--rim); padding: 16px 0 20px; }
+    .mobile-nav.open { display: block; }
+    .mobile-nav a { display: block; padding: 11px 0; font-size: 15px; color: var(--mist); border-bottom: 1px solid var(--rim); }
+    .mobile-nav a:last-child { border-bottom: none; }
+    .mobile-nav .btn { margin-top: 16px; width: 100%; height: 44px; }
+    @media (min-width: 760px) { .nav-links { display: flex; } .menu-btn { display: none; } }
 
-        --emerald: #10b981;
-        --cyan: #06b6d4;
+    /* Hero */
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.7)} }
+    @keyframes slowspin { to{transform:translate(-50%,-50%) rotate(360deg)} }
+    .hero { position: relative; padding: 80px 0 72px; overflow: hidden; background: radial-gradient(ellipse 80% 60% at 60% -10%,rgba(0,201,167,.12),transparent 60%), radial-gradient(ellipse 60% 50% at -10% 60%,rgba(232,24,109,.11),transparent 55%), var(--ink); }
+    .hero-inner { position: relative; z-index: 1; display: grid; gap: 56px; }
+    .hero-eyebrow { display: inline-flex; align-items: center; gap: 10px; padding: 6px 14px; border-radius: 999px; border: 1px solid rgba(0,201,167,.35); background: rgba(0,201,167,.08); font-size: 12px; font-weight: 500; color: var(--teal); letter-spacing: .04em; text-transform: uppercase; width: fit-content; margin-bottom: 24px; }
+    .hero-eyebrow::before { content:''; width:7px; height:7px; border-radius:50%; background:var(--teal); animation:pulse 2.4s ease-in-out infinite; }
+    h1 { font-family: var(--serif); font-size: clamp(36px,5.5vw,68px); line-height: 1.06; letter-spacing: -0.02em; max-width: 15ch; }
+    h1 em { font-style: italic; color: var(--pink); }
+    .hero-sub { margin-top: 20px; font-size: clamp(16px,1.6vw,18px); font-weight: 300; color: var(--mist); max-width: 52ch; line-height: 1.7; }
+    .hero-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
+    .hero-cta .btn { height: 48px; padding: 0 24px; font-size: 15px; }
+    .hero-stats { display: flex; flex-wrap: wrap; gap: 32px; margin-top: 52px; padding-top: 40px; border-top: 1px solid var(--rim); }
+    .stat-num { font-family: var(--serif); font-size: 38px; line-height: 1; color: var(--pink); }
+    .stat-label { font-size: 13px; color: var(--mist); margin-top: 4px; max-width: 18ch; line-height: 1.4; }
+    .hero-visual { display: none; position: relative; align-items: center; justify-content: center; }
+    .orbit-ring { position: absolute; border-radius: 50%; border: 1px solid; animation: slowspin linear infinite; }
+    .ring-1 { width:320px;height:320px;border-color:rgba(232,24,109,.15);animation-duration:40s; }
+    .ring-2 { width:220px;height:220px;border-color:rgba(0,201,167,.18);animation-duration:28s;animation-direction:reverse; }
+    .ring-3 { width:140px;height:140px;border-color:rgba(242,184,75,.14);animation-duration:20s; }
+    .ring-1::after { content:'';position:absolute;width:10px;height:10px;background:var(--pink);border-radius:50%;top:-5px;left:50%;margin-left:-5px;box-shadow:0 0 12px rgba(232,24,109,.7); }
+    .ring-2::after { content:'';position:absolute;width:8px;height:8px;background:var(--teal);border-radius:50%;bottom:-4px;left:50%;margin-left:-4px;box-shadow:0 0 10px rgba(0,201,167,.7); }
+    .orbit-center { width:88px;height:88px;border-radius:50%;background:var(--panel);border:1px solid rgba(255,255,255,.1);box-shadow:0 0 60px rgba(232,24,109,.2),0 0 120px rgba(0,201,167,.15);display:flex;align-items:center;justify-content:center;position:relative;z-index:1; }
+    @media (min-width:900px) { .hero-inner{grid-template-columns:1.15fr .85fr;align-items:center;gap:40px} .hero-visual{display:flex;height:360px} }
 
-        --shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
-        --radius-xl: 22px;
-        --radius-lg: 16px;
+    /* Section base */
+    section { padding: 88px 0; }
+    .section-label { font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--teal); margin-bottom: 16px; }
+    .section-heading { font-family: var(--serif); font-size: clamp(30px,3.6vw,48px); line-height: 1.1; letter-spacing: -0.02em; max-width: 22ch; }
+    .section-body { margin-top: 16px; color: var(--mist); font-weight: 300; font-size: 16px; line-height: 1.7; max-width: 60ch; }
 
-        --maxw: 1120px;
-      }
+    /* Problem */
+    .problem { background: var(--deep); border-top: 1px solid var(--rim); border-bottom: 1px solid var(--rim); }
+    .problem-grid { display: grid; gap: 48px; margin-top: 52px; }
+    .problem-cards { display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 2px; }
+    .problem-card { background: rgba(255,255,255,.035); padding: 28px 24px; transition: background .2s; }
+    .problem-card:first-child { border-radius: var(--r-md) 0 0 var(--r-md); }
+    .problem-card:last-child { border-radius: 0 var(--r-md) var(--r-md) 0; }
+    .problem-card:hover { background: rgba(255,255,255,.055); }
+    .problem-num { font-family: var(--serif); font-size: 48px; line-height: 1; letter-spacing: -0.03em; }
+    .problem-num.pink { color: var(--pink); }
+    .problem-num.teal { color: var(--teal); }
+    .problem-num.gold { color: var(--gold); }
+    .problem-card-label { margin-top: 10px; font-size: 14px; font-weight: 300; color: var(--mist); line-height: 1.5; }
+    .problem-quote { padding: 28px 32px; border-left: 3px solid var(--pink); background: rgba(232,24,109,.06); border-radius: 0 var(--r-md) var(--r-md) 0; font-size: 16px; font-style: italic; font-weight: 300; color: var(--mist); line-height: 1.7; }
+    .problem-quote strong { display: block; margin-top: 12px; font-style: normal; font-size: 13px; font-weight: 500; color: var(--pink); letter-spacing: .04em; text-transform: uppercase; }
+    @media (min-width:820px) { .problem-grid { grid-template-columns: 1fr 1fr; align-items: start; } }
 
-      * {
-        box-sizing: border-box;
-      }
-      html {
-        scroll-behavior: smooth;
-      }
-      body {
-        margin: 0;
-        font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-        color: var(--text);
-        background: radial-gradient(900px 600px at 12% 0%, rgba(16, 185, 129, 0.18), transparent 55%),
-          radial-gradient(900px 600px at 90% 10%, rgba(6, 182, 212, 0.16), transparent 55%),
-          var(--bg);
-      }
-      a {
-        color: inherit;
-        text-decoration: none;
-      }
-      .container {
-        width: min(100% - 32px, var(--maxw));
-        margin: 0 auto;
-      }
+    /* Products */
+    .products-grid { display: grid; gap: 16px; margin-top: 52px; }
+    .product-card { position: relative; background: var(--panel); border: 1px solid var(--rim); border-radius: var(--r-lg); padding: 36px; overflow: hidden; transition: border-color .25s, transform .25s var(--ease), box-shadow .25s; }
+    .product-card::before { content:''; position:absolute; inset:0; border-radius:inherit; opacity:0; transition:opacity .3s; }
+    .product-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+    .card-core:hover { border-color: rgba(232,24,109,.45); }
+    .card-core::before { background: radial-gradient(ellipse 70% 60% at 0% 0%,rgba(232,24,109,.08),transparent 70%); opacity:1; }
+    .card-sentinel:hover { border-color: rgba(0,201,167,.4); }
+    .card-sentinel::before { background: radial-gradient(ellipse 70% 60% at 100% 0%,rgba(0,201,167,.07),transparent 70%); opacity:1; }
+    .card-pathways:hover { border-color: rgba(242,184,75,.35); }
+    .card-pathways::before { background: radial-gradient(ellipse 70% 60% at 0% 100%,rgba(242,184,75,.07),transparent 70%); opacity:1; }
+    .product-card > * { position: relative; z-index: 1; }
+    .product-status { display: inline-flex; align-items: center; gap: 8px; padding: 4px 12px; border-radius: 999px; font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 20px; }
+    .status-building { background: rgba(232,24,109,.12); border: 1px solid rgba(232,24,109,.3); color: var(--pink); }
+    .status-horizon { background: rgba(0,201,167,.1); border: 1px solid rgba(0,201,167,.25); color: var(--teal); }
+    .status-future { background: rgba(242,184,75,.1); border: 1px solid rgba(242,184,75,.25); color: var(--gold); }
+    .dot-sm { width:6px;height:6px;border-radius:50%;background:currentColor;display:inline-block; }
+    .status-building .dot-sm { animation: pulse 2s infinite; }
+    .product-name { font-family: var(--serif); font-size: clamp(26px,3vw,38px); letter-spacing: -0.02em; line-height: 1.05; }
+    .product-sub { font-size: 14px; color: var(--mist); margin-top: 6px; }
+    .product-desc { margin-top: 20px; font-size: 15px; font-weight: 300; color: var(--mist); line-height: 1.7; max-width: 58ch; }
+    .product-features { list-style: none; margin-top: 24px; display: flex; flex-direction: column; gap: 10px; }
+    .product-features li { display: flex; align-items: flex-start; gap: 12px; font-size: 14px; color: var(--mist); line-height: 1.5; }
+    .feat-dot { width:18px;height:18px;border-radius:50%;border:1.5px solid;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px; }
+    .feat-dot::after { content:'';width:6px;height:6px;border-radius:50%;background:currentColor; }
+    .feat-pink { border-color:rgba(232,24,109,.5);color:var(--pink); }
+    .feat-teal { border-color:rgba(0,201,167,.5);color:var(--teal); }
+    .feat-gold { border-color:rgba(242,184,75,.5);color:var(--gold); }
+    .product-footer { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--rim); display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    .product-footer-note { font-size: 12px; color: var(--ghost); }
+    .btn-product { height:40px;padding:0 20px;border-radius:var(--r-sm);font-size:13px;font-weight:500;border:none;cursor:pointer;transition:all .18s var(--ease);text-decoration:none;display:inline-flex;align-items:center;font-family:var(--sans); }
+    .btn-product-pink { background:rgba(232,24,109,.15);color:var(--pink);border:1px solid rgba(232,24,109,.3); }
+    .btn-product-pink:hover { background:rgba(232,24,109,.25); }
+    .btn-product-teal { background:rgba(0,201,167,.12);color:var(--teal);border:1px solid rgba(0,201,167,.3); }
+    .btn-product-teal:hover { background:rgba(0,201,167,.22); }
+    .btn-product-gold { background:rgba(242,184,75,.1);color:var(--gold);border:1px solid rgba(242,184,75,.3); }
+    .btn-product-gold:hover { background:rgba(242,184,75,.2); }
+    @media (min-width:840px) {
+      .products-grid { grid-template-columns: 1fr 1fr; }
+      .card-core { grid-column: span 2; }
+      .card-core .product-features { display:grid;grid-template-columns:1fr 1fr;gap:10px 32px; }
+    }
 
-      /* Header */
-      .header {
-        position: sticky;
-        top: 0;
-        z-index: 100;
-        backdrop-filter: blur(10px);
-        background: rgba(11, 18, 32, 0.65);
-        border-bottom: 1px solid rgba(38, 50, 75, 0.8);
-      }
-      .navrow {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 14px 0;
-        gap: 16px;
-      }
-      .brand {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        min-width: 230px;
-      }
-      .mark {
-        width: 38px;
-        height: 38px;
-        border-radius: 14px;
-        background: linear-gradient(135deg, rgba(16, 185, 129, 0.95), rgba(6, 182, 212, 0.95));
-        box-shadow: 0 12px 30px rgba(16, 185, 129, 0.18);
-      }
-      .brand-name {
-        font-family: Sora, Inter, sans-serif;
-        font-weight: 700;
-        letter-spacing: -0.02em;
-        font-size: 14px;
-        line-height: 1.1;
-      }
-      .brand-sub {
-        font-size: 12px;
-        color: var(--muted);
-        margin-top: 2px;
-      }
-      .nav {
-        display: none;
-        align-items: center;
-        gap: 22px;
-      }
-      .nav a {
-        color: var(--muted);
-        font-size: 14px;
-        transition: 0.15s ease;
-      }
-      .nav a:hover {
-        color: var(--text);
-      }
+    /* How */
+    .how { background: var(--deep); border-top: 1px solid var(--rim); border-bottom: 1px solid var(--rim); }
+    .how-steps { display: grid; gap: 16px; margin-top: 52px; }
+    .how-step { padding: 32px; background: rgba(255,255,255,.025); border-radius: var(--r-md); transition: background .2s; }
+    .how-step:hover { background: rgba(255,255,255,.04); }
+    .step-num-wrap { display: flex; align-items: center; gap: 20px; margin-bottom: 16px; }
+    .step-num { font-family: var(--serif); font-size: 48px; line-height: 1; letter-spacing: -0.04em; color: var(--rim); flex-shrink: 0; min-width: 2ch; }
+    .step-label { font-family: var(--serif); font-size: 22px; letter-spacing: -0.01em; }
+    .step-desc { font-size: 15px; font-weight: 300; color: var(--mist); line-height: 1.7; padding-left: 68px; }
+    @media (min-width:700px) { .how-steps{grid-template-columns:repeat(3,1fr)} .how-step{display:flex;flex-direction:column} .step-num-wrap{flex-direction:column;align-items:flex-start;gap:12px} .step-desc{padding-left:0} }
 
-      .btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        height: 44px;
-        padding: 0 16px;
-        border-radius: 14px;
-        border: 1px solid transparent;
-        cursor: pointer;
-        font-weight: 600;
-        font-size: 14px;
-        transition: 0.15s ease;
-        user-select: none;
-      }
-      .btn-primary {
-        background: var(--emerald);
-        color: #07121e;
-        box-shadow: 0 10px 22px rgba(16, 185, 129, 0.18);
-      }
-      .btn-primary:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 14px 30px rgba(16, 185, 129, 0.22);
-      }
-      .btn-outline {
-        background: rgba(17, 28, 51, 0.35);
-        border-color: rgba(38, 50, 75, 0.9);
-        color: var(--text);
-      }
-      .btn-outline:hover {
-        border-color: rgba(6, 182, 212, 0.8);
-      }
+    /* Mission */
+    .mission-inner { display: grid; gap: 40px; margin-top: 52px; }
+    .mission-values { display: grid; gap: 16px; }
+    .value-card { background: var(--panel); border: 1px solid var(--rim); border-radius: var(--r-md); padding: 24px; }
+    .value-card-top { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+    .value-icon { width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0; }
+    .value-icon.pink { background: rgba(232,24,109,.12); }
+    .value-icon.teal { background: rgba(0,201,167,.1); }
+    .value-icon.gold { background: rgba(242,184,75,.1); }
+    .value-title { font-family: var(--serif); font-size: 18px; letter-spacing: -0.01em; }
+    .value-desc { font-size: 14px; font-weight: 300; color: var(--mist); line-height: 1.6; }
+    .mission-statement { padding: 36px; border: 1px solid var(--rim); border-radius: var(--r-lg); background: linear-gradient(135deg,rgba(232,24,109,.06),rgba(0,201,167,.05)); }
+    .mission-statement blockquote { font-family: var(--serif); font-size: clamp(20px,2.5vw,28px); font-style: italic; letter-spacing: -0.015em; line-height: 1.4; }
+    .mission-statement cite { display:block;margin-top:20px;font-size:13px;font-style:normal;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--teal); }
+    @media (min-width:820px) { .mission-inner { grid-template-columns: 1fr 1fr; align-items: start; } }
 
-      .menu-btn {
-        width: 44px;
-        padding: 0;
-      }
-      .menu-btn span {
-        display: inline-block;
-        width: 18px;
-        height: 2px;
-        background: var(--text);
-        position: relative;
-        border-radius: 2px;
-      }
-      .menu-btn span::before,
-      .menu-btn span::after {
-        content: "";
-        position: absolute;
-        left: 0;
-        width: 18px;
-        height: 2px;
-        background: var(--text);
-        border-radius: 2px;
-      }
-      .menu-btn span::before {
-        top: -6px;
-      }
-      .menu-btn span::after {
-        top: 6px;
-      }
+    /* Traction */
+    .traction { background: var(--deep); border-top: 1px solid var(--rim); }
+    .traction-grid { display: grid; gap: 16px; margin-top: 52px; }
+    .traction-stat { background: var(--panel); border: 1px solid var(--rim); border-radius: var(--r-md); padding: 28px 24px; text-align: center; transition: border-color .2s, transform .2s var(--ease); }
+    .traction-stat:hover { transform: translateY(-2px); border-color: rgba(255,255,255,.12); }
+    .traction-num { font-family: var(--serif); font-size: 52px; line-height: 1; letter-spacing: -0.04em; }
+    .traction-stat-label { font-size: 13px; font-weight: 300; color: var(--mist); margin-top: 8px; line-height: 1.4; }
+    .traction-insight { grid-column:1/-1;background:rgba(232,24,109,.04);border:1px solid rgba(232,24,109,.2);border-radius:var(--r-lg);padding:32px 36px;display:flex;gap:24px;align-items:flex-start; }
+    .insight-icon { width:48px;height:48px;border-radius:50%;background:rgba(232,24,109,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0; }
+    .insight-label { font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--pink);margin-bottom:8px; }
+    .insight-body { font-size:16px;font-weight:300;color:var(--mist);line-height:1.7; }
+    .insight-body strong { color:var(--white);font-weight:500; }
+    @media (min-width:600px) { .traction-grid{grid-template-columns:repeat(2,1fr)} }
+    @media (min-width:900px) { .traction-grid{grid-template-columns:repeat(4,1fr)} }
 
-      /* Mobile menu */
-      .mobile-drawer {
-        display: none;
-        border-top: 1px solid rgba(38, 50, 75, 0.8);
-        background: rgba(15, 23, 42, 0.78);
-      }
-      .mobile-drawer.open {
-        display: block;
-      }
-      .mobile-links {
-        padding: 14px 0 18px 0;
-        display: grid;
-        gap: 10px;
-      }
-      .mobile-links a {
-        color: var(--muted);
-        font-size: 14px;
-        padding: 10px 12px;
-        border-radius: 12px;
-        border: 1px solid rgba(38, 50, 75, 0.55);
-        background: rgba(17, 28, 51, 0.25);
-      }
-      .mobile-links a:hover {
-        color: var(--text);
-        border-color: rgba(6, 182, 212, 0.55);
-      }
-      .mobile-cta {
-        margin-top: 10px;
-      }
+    /* Contact */
+    .contact { border-top: 1px solid var(--rim); }
+    .contact-grid { display: grid; gap: 16px; margin-top: 52px; }
+    .contact-card { background: var(--panel); border: 1px solid var(--rim); border-radius: var(--r-lg); padding: 36px; transition: border-color .2s; }
+    .contact-card:hover { border-color: rgba(255,255,255,.12); }
+    .contact-card h3 { font-family: var(--serif); font-size: clamp(22px,2.5vw,30px); letter-spacing: -0.02em; margin-top: 12px; line-height: 1.2; }
+    .contact-card p { margin-top: 12px; font-size: 15px; font-weight: 300; color: var(--mist); line-height: 1.65; }
+    .contact-email { margin-top: 20px; display: inline-flex; align-items: center; gap: 10px; font-size: 17px; font-weight: 500; color: var(--teal); transition: color .15s; }
+    .contact-email:hover { color: var(--white); }
+    .partnership-links { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+    .partner-link { display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 18px;background:rgba(255,255,255,.03);border:1px solid var(--rim);border-radius:var(--r-md);font-size:14px;color:var(--white);transition:all .18s; }
+    .partner-link:hover { background:rgba(255,255,255,.06);border-color:rgba(0,201,167,.3);color:var(--teal); }
+    .partner-link span { font-size:18px;opacity:.5; }
+    @media (min-width:820px) { .contact-grid{grid-template-columns:1fr 1fr;align-items:start} }
 
-      /* Hero */
-      .hero {
-        padding: 58px 0 30px;
-      }
-      .hero-grid {
-        display: grid;
-        gap: 22px;
-      }
-      .badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        padding: 8px 12px;
-        border-radius: 999px;
-        background: rgba(27, 39, 66, 0.7);
-        border: 1px solid rgba(38, 50, 75, 0.8);
-        color: rgba(6, 182, 212, 0.95);
-        font-weight: 700;
-        font-size: 12px;
-        width: fit-content;
-      }
-      h1 {
-        font-family: Sora, Inter, sans-serif;
-        letter-spacing: -0.03em;
-        line-height: 1.08;
-        margin: 14px 0 0;
-        font-size: clamp(30px, 4.4vw, 52px);
-      }
-      .hero p {
-        margin: 14px 0 0;
-        color: var(--muted);
-        font-size: 16px;
-        line-height: 1.55;
-        max-width: 58ch;
-      }
-      .cta-row {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        margin-top: 18px;
-      }
-      .chips {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-top: 18px;
-      }
-      .chip {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        padding: 8px 12px;
-        border-radius: 999px;
-        border: 1px solid rgba(38, 50, 75, 0.75);
-        background: rgba(15, 23, 42, 0.45);
-        color: var(--muted);
-        font-size: 13px;
-      }
-      .dot {
-        width: 10px;
-        height: 10px;
-        border-radius: 999px;
-        background: var(--emerald);
-      }
-      .dot.cyan {
-        background: var(--cyan);
-      }
+    /* Footer */
+    footer { border-top: 1px solid var(--rim); padding: 48px 0 36px; }
+    .footer-inner { display: grid; gap: 40px; }
+    .footer-brand p { margin-top:12px;font-size:14px;font-weight:300;color:var(--ghost);max-width:40ch;line-height:1.6; }
+    .footer-links-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:24px; }
+    .footer-col h4 { font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--mist);margin-bottom:14px; }
+    .footer-col a { display:block;font-size:14px;color:var(--ghost);margin-bottom:10px;transition:color .15s; }
+    .footer-col a:hover { color: var(--white); }
+    .footer-bottom { margin-top:36px;padding-top:20px;border-top:1px solid var(--rim);display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:12px;color:var(--ghost); }
+    @media (min-width:760px) { .footer-inner{grid-template-columns:1.3fr 1fr;align-items:start} }
 
-      .panel {
-        border: 1px solid rgba(38, 50, 75, 0.85);
-        background: rgba(17, 28, 51, 0.55);
-        border-radius: var(--radius-xl);
-        box-shadow: var(--shadow);
-        overflow: hidden;
-      }
-      .panel-header {
-        padding: 18px 18px 0;
-      }
-      .panel-title {
-        font-family: Sora, Inter, sans-serif;
-        font-weight: 700;
-        letter-spacing: -0.02em;
-        font-size: 16px;
-      }
-      .panel-sub {
-        color: var(--muted);
-        font-size: 13px;
-        margin-top: 6px;
-        line-height: 1.45;
-      }
-      .panel-body {
-        padding: 18px;
-        display: grid;
-        gap: 10px;
-      }
-      .step {
-        border: 1px solid rgba(38, 50, 75, 0.7);
-        background: rgba(15, 23, 42, 0.38);
-        border-radius: 18px;
-        padding: 14px;
-      }
-      .step-title {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-weight: 700;
-        font-size: 14px;
-      }
-      .pill {
-        font-size: 12px;
-        padding: 3px 8px;
-        border-radius: 999px;
-        border: 1px solid rgba(38, 50, 75, 0.7);
-        background: rgba(27, 39, 66, 0.6);
-        color: rgba(6, 182, 212, 0.95);
-        margin-left: auto;
-      }
-      .step-desc {
-        margin-top: 8px;
-        color: var(--muted);
-        font-size: 13px;
-        line-height: 1.45;
-      }
+    /* Reveal - disabled, content always visible */
+    .reveal { opacity: 1; transform: none; }
 
-      /* Sections */
-      section {
-        padding: 56px 0;
-      }
-      .section-title {
-        font-family: Sora, Inter, sans-serif;
-        font-weight: 800;
-        letter-spacing: -0.02em;
-        margin: 0;
-        font-size: 28px;
-      }
-      .section-sub {
-        color: var(--muted);
-        margin-top: 10px;
-        line-height: 1.55;
-        max-width: 70ch;
-        font-size: 15px;
-      }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--ink); }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,.12); border-radius: 3px; }
+    :focus-visible { outline: 2px solid rgba(0,201,167,.7); outline-offset: 3px; border-radius: 6px; }
+  </style>
+</head>
+<body>
 
-      .grid-3 {
-        display: grid;
-        gap: 14px;
-        margin-top: 22px;
-      }
-      .card {
-        border-radius: var(--radius-xl);
-        border: 1px solid rgba(38, 50, 75, 0.85);
-        background: rgba(17, 28, 51, 0.5);
-        padding: 18px;
-      }
-      .card-top {
-        display: flex;
-        align-items: flex-start;
-        justify-content: space-between;
-        gap: 14px;
-      }
-      .kicker {
-        color: rgba(6, 182, 212, 0.95);
-        font-size: 12px;
-        font-weight: 800;
-        letter-spacing: 0.02em;
-      }
-      .card h3 {
-        font-family: Sora, Inter, sans-serif;
-        margin: 10px 0 0;
-        font-size: 18px;
-        letter-spacing: -0.02em;
-      }
-      .tagline {
-        color: var(--muted);
-        font-size: 13px;
-        margin-top: 4px;
-      }
-      .card p {
-        color: var(--muted);
-        line-height: 1.55;
-        margin-top: 10px;
-        font-size: 14px;
-      }
-      .bullets {
-        margin: 14px 0 0;
-        padding: 0;
-        list-style: none;
-        display: grid;
-        gap: 10px;
-      }
-      .bullets li {
-        display: flex;
-        gap: 10px;
-        align-items: flex-start;
-        color: var(--muted);
-        font-size: 14px;
-        line-height: 1.4;
-      }
-      .bullets li::before {
-        content: "";
-        width: 8px;
-        height: 8px;
-        border-radius: 999px;
-        background: var(--emerald);
-        margin-top: 6px;
-        flex: none;
-      }
+<header class="header">
+  <div class="wrap">
+    <div class="nav-row">
+      <a class="brand" href="#" aria-label="EndoMatrix Labs home">
+        <svg class="brand-mark" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="hdr-arc" x1="4" y1="0" x2="44" y2="48" gradientUnits="userSpaceOnUse"><stop stop-color="#E8186D"/><stop offset="1" stop-color="#00C9A7"/></linearGradient>
+            <linearGradient id="hdr-sig" x1="4" y1="24" x2="44" y2="24" gradientUnits="userSpaceOnUse"><stop stop-color="#E8186D"/><stop offset="1" stop-color="#00C9A7"/></linearGradient>
+          </defs>
+          <path d="M 38 33 A 18 18 0 1 0 38 15" stroke="url(#hdr-arc)" stroke-width="2.8" stroke-linecap="round" fill="none"/>
+          <path d="M 11 27 L 16 22 L 21 25 L 26 19 L 31 23 L 36 17" stroke="url(#hdr-sig)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <circle cx="36" cy="17" r="3.5" fill="#00C9A7"/>
+          <circle cx="36" cy="17" r="6.5" stroke="#00C9A7" stroke-width="1" fill="none" opacity="0.35"/>
+        </svg>
+        <span class="brand-text">
+          <span class="brand-name">EndoMatrix Labs</span>
+          <span class="brand-tagline">Endocrine Intelligence</span>
+        </span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#products">Products</a>
+        <a href="#how">How it works</a>
+        <a href="#mission">Mission</a>
+        <a href="#traction">Traction</a>
+        <a href="#contact" class="btn btn-pink" style="height:36px;padding:0 16px;font-size:13px;">Talk to us</a>
+      </nav>
+      <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <nav class="mobile-nav" id="mobileNav" aria-label="Mobile">
+      <a href="#products" class="mobile-link">Products</a>
+      <a href="#how" class="mobile-link">How it works</a>
+      <a href="#mission" class="mobile-link">Mission</a>
+      <a href="#traction" class="mobile-link">Traction</a>
+      <a href="#contact" class="btn btn-pink mobile-link">Talk to us</a>
+    </nav>
+  </div>
+</header>
 
-      .split {
-        display: grid;
-        gap: 14px;
-        margin-top: 22px;
-      }
+<main>
 
-      .mini {
-        display: grid;
-        gap: 12px;
-        margin-top: 16px;
-      }
-      .mini-card {
-        border-radius: 18px;
-        border: 1px solid rgba(38, 50, 75, 0.7);
-        background: rgba(15, 23, 42, 0.35);
-        padding: 14px;
-      }
-      .mini-title {
-        font-weight: 800;
-        font-size: 14px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-      .mini-desc {
-        margin-top: 8px;
-        color: var(--muted);
-        font-size: 13px;
-        line-height: 1.45;
-      }
-
-      /* Contact */
-      .contact {
-        border-top: 1px solid rgba(38, 50, 75, 0.85);
-        background: rgba(15, 23, 42, 0.45);
-      }
-      .contact-grid {
-        display: grid;
-        gap: 16px;
-        margin-top: 20px;
-      }
-      .contact-card {
-        border-radius: var(--radius-xl);
-        border: 1px solid rgba(38, 50, 75, 0.85);
-        background: rgba(17, 28, 51, 0.5);
-        padding: 18px;
-      }
-      .email {
-        color: rgba(6, 182, 212, 0.95);
-        font-weight: 800;
-        margin-top: 10px;
-      }
-      .stack {
-        display: grid;
-        gap: 10px;
-        margin-top: 14px;
-      }
-      .linkbtn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 10px;
-        border-radius: 16px;
-        border: 1px solid rgba(38, 50, 75, 0.85);
-        background: rgba(15, 23, 42, 0.35);
-        padding: 12px 12px;
-        font-weight: 700;
-        font-size: 14px;
-        color: var(--text);
-      }
-      .linkbtn:hover {
-        border-color: rgba(6, 182, 212, 0.65);
-      }
-
-      /* Footer */
-      footer {
-        border-top: 1px solid rgba(38, 50, 75, 0.85);
-        padding: 40px 0;
-      }
-      .footer-grid {
-        display: grid;
-        gap: 24px;
-      }
-      .footer-links {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 18px;
-      }
-      .footer-links h4 {
-        margin: 0;
-        font-family: Sora, Inter, sans-serif;
-        font-size: 14px;
-        letter-spacing: -0.01em;
-      }
-      .footer-links a {
-        display: block;
-        margin-top: 10px;
-        color: var(--muted);
-        font-size: 13px;
-      }
-      .footer-links a:hover {
-        color: var(--text);
-      }
-      .fineprint {
-        margin-top: 26px;
-        color: var(--muted);
-        font-size: 12px;
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-      }
-
-      /* Focus styles */
-      a:focus-visible,
-      button:focus-visible {
-        outline: 2px solid rgba(6, 182, 212, 0.85);
-        outline-offset: 3px;
-        border-radius: 14px;
-      }
-
-      /* Desktop breakpoints */
-      @media (min-width: 860px) {
-        .nav {
-          display: flex;
-        }
-        .menu-btn {
-          display: none;
-        }
-        .hero-grid {
-          grid-template-columns: 1.2fr 0.8fr;
-          align-items: start;
-          gap: 20px;
-        }
-        .cta-row {
-          flex-direction: row;
-        }
-        .grid-3 {
-          grid-template-columns: repeat(3, minmax(0, 1fr));
-          gap: 16px;
-        }
-        .split {
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-          gap: 16px;
-        }
-        .contact-grid {
-          grid-template-columns: 1.05fr 0.95fr;
-          align-items: start;
-          gap: 16px;
-        }
-        .footer-grid {
-          grid-template-columns: 1.2fr 0.8fr;
-          align-items: start;
-        }
-        .footer-links {
-          grid-template-columns: repeat(3, minmax(0, 1fr));
-        }
-      }
-
-      /* Reduced motion */
-      @media (prefers-reduced-motion: reduce) {
-        * {
-          scroll-behavior: auto !important;
-          transition: none !important;
-        }
-      }
-    </style>
-  </head>
-
-  <body>
-    <!-- Header -->
-    <header class="header">
-      <div class="container">
-        <div class="navrow">
-          <a class="brand" href="#top" aria-label="EndoMatrix Labs home">
-            <span class="mark" aria-hidden="true"></span>
-            <span>
-              <div class="brand-name">EndoMatrix Labs</div>
-              <div class="brand-sub">Endocrine intelligence</div>
-            </span>
-          </a>
-
-          <nav class="nav" aria-label="Primary navigation">
-            <a href="#products">Products</a>
-            <a href="#about">About</a>
-            <a href="#blog">Blog</a>
-            <a href="#contact">Contact</a>
-            <a class="btn btn-primary" href="#contact">Talk to us</a>
-          </nav>
-
-          <button class="btn btn-outline menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
-            <span aria-hidden="true"></span>
-          </button>
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-eyebrow">Kenya pilot in progress</div>
+        <h1>Endocrine intelligence for <em>anticipatory</em> health</h1>
+        <p class="hero-sub">EndoMatrix Labs builds hormone-aware sensing and decision support systems that turn longitudinal signals into interpretable early warnings for prevention and planning.Starting with women whose symptoms have been dismissed, measured, or missed entirely.</p>
+        <div class="hero-cta">
+          <a href="#products" class="btn btn-pink">Explore our products</a>
+          <a href="#contact" class="btn btn-ghost">Partner with us</a>
         </div>
-
-        <div class="mobile-drawer" id="mobileDrawer">
-          <div class="mobile-links">
-            <a href="#products">Products</a>
-            <a href="#about">About</a>
-            <a href="#blog">Blog</a>
-            <a href="#contact">Contact</a>
-            <div class="mobile-cta">
-              <a class="btn btn-primary" style="width: 100%" href="#contact">Talk to us</a>
-            </div>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <div class="stat-num">7&#8211;10</div>
+            <div class="stat-label">years average to diagnose endometriosis</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">190M</div>
+            <div class="stat-label">women affected globally</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">74%</div>
+            <div class="stat-label">of global deaths linked to NCDs hormone-driven</div>
           </div>
         </div>
       </div>
-    </header>
-
-    <!-- Hero -->
-    <main id="top">
-      <section class="hero">
-        <div class="container">
-          <div class="hero-grid">
-            <div>
-              <div class="badge">Women-first pilot • Population-ready platform</div>
-
-              <h1>Endocrine intelligence for anticipatory health</h1>
-
-              <p>
-                EndoMatrix Labs builds hormone-aware sensing and decision support systems that turn longitudinal signals
-                into interpretable early warnings for prevention and planning. Start with women, then expand to broader
-                populations as evidence and partnerships grow.
-              </p>
-
-              <div class="cta-row">
-                <a class="btn btn-primary" href="#products">Explore products</a>
-                <a class="btn btn-outline" href="#about">How we work</a>
-              </div>
-
-              <div class="chips" aria-label="Trust highlights">
-                <div class="chip"><span class="dot cyan"></span>Privacy-by-design</div>
-                <div class="chip"><span class="dot"></span>Hybrid sensing (USSD + wearables)</div>
-                <div class="chip"><span class="dot cyan"></span>Interpretable drift signals</div>
-              </div>
-            </div>
-
-            <aside class="panel" aria-label="From signals to action">
-              <div class="panel-header">
-                <div class="panel-title">From signals to action</div>
-                <div class="panel-sub">A simple, operational view of how Sentinel turns inputs into anticipatory care.</div>
-              </div>
-
-              <div class="panel-body">
-                <div class="step">
-                  <div class="step-title">
-                    Sensing <span class="pill">Hybrid</span>
-                  </div>
-                  <div class="step-desc">SMS/USSD check-ins for inclusion, plus optional wearable and biosensing proxies.</div>
-                </div>
-                <div class="step">
-                  <div class="step-title">
-                    Intelligence <span class="pill">Baseline</span>
-                  </div>
-                  <div class="step-desc">Personal baselines that detect meaningful drift, not generic averages.</div>
-                </div>
-                <div class="step">
-                  <div class="step-title">
-                    Action <span class="pill">Operational</span>
-                  </div>
-                  <div class="step-desc">Interpretable early warning outputs that support follow-up and low-cost prevention.</div>
-                </div>
-              </div>
-            </aside>
-          </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="ring-1 orbit-ring"></div>
+        <div class="ring-2 orbit-ring"></div>
+        <div class="ring-3 orbit-ring"></div>
+        <div class="orbit-center">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <defs>
+              <linearGradient id="hero-arc" x1="4" y1="0" x2="44" y2="48" gradientUnits="userSpaceOnUse"><stop stop-color="#E8186D"/><stop offset="1" stop-color="#00C9A7"/></linearGradient>
+              <linearGradient id="hero-sig" x1="4" y1="24" x2="44" y2="24" gradientUnits="userSpaceOnUse"><stop stop-color="#E8186D"/><stop offset="1" stop-color="#00C9A7"/></linearGradient>
+            </defs>
+            <path d="M 38 33 A 18 18 0 1 0 38 15" stroke="url(#hero-arc)" stroke-width="2.8" stroke-linecap="round" fill="none"/>
+            <path d="M 11 27 L 16 22 L 21 25 L 26 19 L 31 23 L 36 17" stroke="url(#hero-sig)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <circle cx="36" cy="17" r="3.5" fill="#00C9A7"/>
+            <circle cx="36" cy="17" r="6.5" stroke="#00C9A7" stroke-width="1" fill="none" opacity="0.35"/>
+          </svg>
         </div>
-      </section>
+      </div>
+    </div>
+  </div>
+</section>
 
-      <!-- Products -->
-      <section id="products">
-        <div class="container">
-          <h2 class="section-title">Products</h2>
-          <p class="section-sub">
-            EndoMatrix Labs is a platform company. Sentinel is one product, designed to coexist with others across
-            women’s health and preventive care.
-          </p>
-
-          <div class="grid-3">
-            <article class="card">
-              <div class="card-top">
-                <div>
-                  <div class="kicker">PRODUCT</div>
-                  <h3>Sentinel</h3>
-                  <div class="tagline">Population early warning</div>
-                </div>
-              </div>
-              <p>
-                Endocrine intelligence for anticipatory care. Turns longitudinal proxy signals into cohort-level early
-                warnings and actionable decision support.
-              </p>
-              <ul class="bullets">
-                <li>Hybrid sensing: SMS/USSD + optional wearables</li>
-                <li>Privacy-preserving aggregation and alerts</li>
-                <li>Built for low-resource deployment</li>
-              </ul>
-              <div style="margin-top: 16px">
-                <a class="btn btn-outline" href="#contact" style="width: 100%">Explore Sentinel</a>
-              </div>
-            </article>
-
-            <article class="card">
-              <div class="card-top">
-                <div>
-                  <div class="kicker">PRODUCT</div>
-                  <h3>Core</h3>
-                  <div class="tagline">Personal endocrine insights</div>
-                </div>
-              </div>
-              <p>
-                A low-burden daily and weekly logging experience that learns personal baselines and produces interpretable
-                summaries women can use in real life and clinical visits.
-              </p>
-              <ul class="bullets">
-                <li>Cycle and symptom logging that works offline-first</li>
-                <li>Personal baselines, not generic averages</li>
-                <li>Clinic-ready summaries and red-flag prompts</li>
-              </ul>
-              <div style="margin-top: 16px">
-                <a class="btn btn-outline" href="#about" style="width: 100%">See how it works</a>
-              </div>
-            </article>
-
-            <article class="card">
-              <div class="card-top">
-                <div>
-                  <div class="kicker">PRODUCT</div>
-                  <h3>Care Pathways</h3>
-                  <div class="tagline">Action, not dashboards</div>
-                </div>
-              </div>
-              <p>
-                Workflow-ready outputs for primary care and community health networks that prioritize follow-up and
-                support low-cost prevention before complications escalate.
-              </p>
-              <ul class="bullets">
-                <li>Follow-up prioritization and outreach lists</li>
-                <li>Interpretable early warning flags</li>
-                <li>Designed to align with existing care workflows</li>
-              </ul>
-              <div style="margin-top: 16px">
-                <a class="btn btn-outline" href="#contact" style="width: 100%">Partner with us</a>
-              </div>
-            </article>
-          </div>
+<!-- PROBLEM -->
+<section class="problem" id="problem">
+  <div class="wrap">
+    <p class="section-label">The Gap</p>
+    <h2 class="section-heading">Women's pain is tracked in episodes. We track it over time.</h2>
+    <p class="section-body">Health systems detect hormone-related risk only after symptoms escalate. Years of endocrine variance that signal future disease go unread. We change that.</p>
+    <div class="problem-grid reveal">
+      <div class="problem-cards">
+        <div class="problem-card">
+          <div class="problem-num pink">61%</div>
+          <p class="problem-card-label">of hospital deaths in Kenya are now from non-communicable diseases</p>
         </div>
-      </section>
-
-      <!-- About -->
-      <section id="about" style="border-top: 1px solid rgba(38, 50, 75, 0.85); border-bottom: 1px solid rgba(38, 50, 75, 0.85); background: rgba(15, 23, 42, 0.35);">
-        <div class="container">
-          <h2 class="section-title">Mission and vision</h2>
-          <p class="section-sub">We build endocrine intelligence systems that help people and health systems act earlier, with dignity and trust.</p>
-
-          <div class="split">
-            <article class="card">
-              <div class="kicker">MISSION</div>
-              <h3 style="margin-top: 10px;">What we do, day to day</h3>
-              <ul class="bullets" style="margin-top: 14px;">
-                <li>Capture meaningful signals with hybrid sensing that works on basic phones.</li>
-                <li>Turn data into interpretable insight using personal baselines and drift detection.</li>
-                <li>Connect insight to action through workflow-ready outputs for follow-up and prevention.</li>
-              </ul>
-            </article>
-
-            <article class="card">
-              <div class="kicker">VISION</div>
-              <h3 style="margin-top: 10px;">Where we are going</h3>
-              <p style="margin-top: 10px;">
-                A world where endocrine transitions are not dismissed, and where early physiological drift becomes a trusted signal for prevention.
-                We start with women because cyclical and life-stage endocrine transitions create clear longitudinal patterns and a major data gap,
-                then expand to broader populations as evidence and partnerships grow.
-              </p>
-
-              <div class="mini">
-                <div class="mini-card">
-                  <div class="mini-title"><span class="dot cyan"></span>Trust</div>
-                  <div class="mini-desc">Consent, minimization, and privacy-preserving aggregation by default.</div>
-                </div>
-                <div class="mini-card">
-                  <div class="mini-title"><span class="dot"></span>Clarity</div>
-                  <div class="mini-desc">Outputs designed to be understood by users, clinicians, and decision-makers.</div>
-                </div>
-              </div>
-            </article>
-          </div>
+        <div class="problem-card">
+          <div class="problem-num teal">&#8532;</div>
+          <p class="problem-card-label">of people with diabetes in Kenya remain undiagnosed</p>
         </div>
-      </section>
-
-      <!-- Blog -->
-      <section id="blog">
-        <div class="container">
-          <h2 class="section-title">Blog</h2>
-          <p class="section-sub">Notes from the lab. Replace these with real posts when you’re ready.</p>
-
-          <div class="grid-3">
-            <article class="card">
-              <div class="kicker">EXPLAINER</div>
-              <h3>Why endocrine intelligence matters</h3>
-              <p>How longitudinal proxy signals can surface risk earlier in the disease trajectory.</p>
-              <div style="margin-top: 16px;">
-                <span class="btn btn-outline" style="width:100%; opacity:0.7; cursor:not-allowed;">Coming soon</span>
-              </div>
-            </article>
-            <article class="card">
-              <div class="kicker">IMPLEMENTATION</div>
-              <h3>Hybrid sensing in low-resource settings</h3>
-              <p>Designing for SMS/USSD first, then adding high-resolution signals where available.</p>
-              <div style="margin-top: 16px;">
-                <span class="btn btn-outline" style="width:100%; opacity:0.7; cursor:not-allowed;">Coming soon</span>
-              </div>
-            </article>
-            <article class="card">
-              <div class="kicker">ETHICS</div>
-              <h3>Privacy, trust, and women-first health data</h3>
-              <p>Practical safeguards that make sensing useful without becoming surveillance.</p>
-              <div style="margin-top: 16px;">
-                <span class="btn btn-outline" style="width:100%; opacity:0.7; cursor:not-allowed;">Coming soon</span>
-              </div>
-            </article>
-          </div>
+        <div class="problem-card">
+          <div class="problem-num gold">0</div>
+          <p class="problem-card-label">longitudinal hormonal datasets exist for women in Sub-Saharan Africa at scale</p>
         </div>
-      </section>
-
-      <!-- Contact -->
-      <section id="contact" class="contact">
-        <div class="container">
-          <h2 class="section-title">Contact</h2>
-          <p class="section-sub">If you work in primary care, public health, insurance, research, or sensing hardware, we would love to hear from you.</p>
-
-          <div class="contact-grid">
-            <div class="contact-card">
-              <div class="kicker">GET IN TOUCH</div>
-              <h3 style="margin-top:10px; font-family:Sora, Inter, sans-serif;">Let’s build anticipatory care that works</h3>
-              <p style="margin-top:10px;">No logins or accounts on this site. Just a clear way to reach us.</p>
-              <div class="email">hello@endomatrixlabs.tech</div>
-            </div>
-
-            <div class="contact-card" aria-label="Partnership interests">
-              <div class="kicker">PARTNERSHIPS</div>
-              <h3 style="margin-top:10px; font-family:Sora, Inter, sans-serif;">Partnership interests</h3>
-              <p style="margin-top:10px;">Pick a starting point and we’ll reply with next steps.</p>
-
-              <div class="stack">
-                <a class="linkbtn" href="mailto:hello@endomatrixlabs.tech?subject=Pilot%20partner%20for%20Sentinel">Pilot partner (clinic or county program) <span>→</span></a>
-                <a class="linkbtn" href="mailto:hello@endomatrixlabs.tech?subject=Payer%20or%20insurer%20prevention%20program">Payer or insurer prevention program <span>→</span></a>
-                <a class="linkbtn" href="mailto:hello@endomatrixlabs.tech?subject=Hardware%20or%20sensor%20integration%20partnership">Hardware or sensor integration <span>→</span></a>
-                <a class="linkbtn" href="mailto:hello@endomatrixlabs.tech?subject=General%20inquiry">General inquiry <span>→</span></a>
-              </div>
-            </div>
-          </div>
+      </div>
+      <div>
+        <div class="problem-quote">
+          "During episodes of debilitating symptoms, women plan to seek care — but once relief comes, they focus on catching up with life and postpone until the next episode. This loop repeats indefinitely."
+          <strong>Pain-Relief-Delay Loop — discovered in 15 Kenya discovery interviews</strong>
         </div>
-      </section>
+      </div>
+    </div>
+  </div>
+</section>
 
-      <!-- Footer -->
-      <footer>
-        <div class="container">
-          <div class="footer-grid">
-            <div>
-              <div class="brand" style="min-width: unset;">
-                <span class="mark" aria-hidden="true"></span>
-                <span>
-                  <div class="brand-name">EndoMatrix Labs</div>
-                  <div class="brand-sub">Endocrine intelligence</div>
-                </span>
-              </div>
-              <p style="color:var(--muted); margin-top:12px; max-width: 52ch; line-height:1.55;">
-                EndoMatrix Labs builds hormone-aware sensing and decision support systems for anticipatory health.
-              </p>
-            </div>
+<!-- PRODUCTS -->
+<section id="products">
+  <div class="wrap">
+    <p class="section-label">Products</p>
+    <h2 class="section-heading">From individual insight to population intelligence</h2>
+    <p class="section-body">A platform company. Each product is designed to stand alone and compound together as evidence and partnerships grow.</p>
+    <div class="products-grid">
 
-            <div class="footer-links">
-              <div>
-                <h4>Company</h4>
-                <a href="#about">About</a>
-                <a href="#blog">Blog</a>
-                <a href="#contact">Contact</a>
-              </div>
-              <div>
-                <h4>Products</h4>
-                <a href="#products">Sentinel</a>
-                <a href="#products">Core</a>
-                <a href="#products">Care Pathways</a>
-              </div>
-              <div>
-                <h4>Legal</h4>
-                <a href="#top" onclick="alert('Add your privacy policy page link when ready.'); return false;">Privacy</a>
-                <a href="#top" onclick="alert('Add your terms page link when ready.'); return false;">Terms</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="fineprint">
-            <div>© <span id="year"></span> EndoMatrix Labs. All rights reserved.</div>
-            <div>Built for mobile-first access. No accounts on this site.</div>
-          </div>
+      <article class="product-card card-core reveal">
+        <div class="product-status status-building"><span class="dot-sm"></span> Building now</div>
+        <h3 class="product-name">EndoMatrix Core</h3>
+        <p class="product-sub">Personal endocrine pattern interpreter</p>
+        <p class="product-desc">A mobile-first web application that transforms daily symptom logs into interpretable hormonal patterns. Core includes a built-in cycle tracker — users log their period and cycle data directly in the app, or link their existing tracker of choice. Daily symptoms are then anchored to cycle phase, letting the system map pain, energy, and mood to specific hormonal windows over time. Over 30 days, the system surfaces cycle-phase patterns, escalation signals, and the "I finally see it" moment — building a structured record users can bring to clinical conversations.</p>
+        <ul class="product-features">
+          <li><span class="feat-dot feat-pink"></span>Built-in cycle tracker — or link your existing period app</li>
+          <li><span class="feat-dot feat-pink"></span>Daily 3-input log: pain, energy, dominant symptom — under 60 seconds</li>
+          <li><span class="feat-dot feat-pink"></span>Symptoms anchored to cycle phase, not just calendar date</li>
+          <li><span class="feat-dot feat-pink"></span>30-day insight: when symptoms begin, how they escalate, what clusters together</li>
+          <li><span class="feat-dot feat-pink"></span>Clinic-ready summaries users can share or export</li>
+          <li><span class="feat-dot feat-pink"></span>Future: wearable device and hormone patch integrations in development</li>
+        </ul>
+        <div class="product-footer">
+          <span class="product-footer-note">Mobile-first PWA · Closed beta Q1 2026</span>
+          <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#105;&#110;&#102;&#111;&#64;&#101;&#110;&#100;&#111;&#109;&#97;&#116;&#114;&#105;&#120;&#108;&#97;&#98;&#115;&#46;&#116;&#101;&#99;&#104;?subject=Join%20EndoMatrix%20Core%20waitlist" class="btn-product btn-product-pink">Join waitlist</a>
         </div>
-      </footer>
-    </main>
+      </article>
 
-    <script>
-      // Footer year
-      document.getElementById("year").textContent = new Date().getFullYear();
+      <article class="product-card card-sentinel reveal">
+        <div class="product-status status-horizon"><span class="dot-sm"></span> Horizon product</div>
+        <h3 class="product-name">Sentinel</h3>
+        <p class="product-sub">Endocrine intelligence at population scale</p>
+        <p class="product-desc">Once Core proves individual clinical utility, Sentinel becomes the population layer. An endocrine early-warning platform that de-identifies and aggregates signals into cohort risk trajectories for public health programs, primary care networks, and insurers.</p>
+        <ul class="product-features">
+          <li><span class="feat-dot feat-teal"></span>Hybrid sensing: SMS/USSD plus optional wearables</li>
+          <li><span class="feat-dot feat-teal"></span>Privacy-preserving aggregation and alerts</li>
+          <li><span class="feat-dot feat-teal"></span>Cohort risk trajectories for county health programs</li>
+        </ul>
+        <div class="product-footer">
+          <span class="product-footer-note">Designed for Kenya · SMS/USSD-first</span>
+          <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#105;&#110;&#102;&#111;&#64;&#101;&#110;&#100;&#111;&#109;&#97;&#116;&#114;&#105;&#120;&#108;&#97;&#98;&#115;&#46;&#116;&#101;&#99;&#104;?subject=Sentinel%20partnership" class="btn-product btn-product-teal">Partner early</a>
+        </div>
+      </article>
 
-      // Mobile menu
-      const btn = document.getElementById("menuBtn");
-      const drawer = document.getElementById("mobileDrawer");
-      btn.addEventListener("click", () => {
-        const isOpen = drawer.classList.toggle("open");
-        btn.setAttribute("aria-expanded", String(isOpen));
-      });
+      <article class="product-card card-pathways reveal">
+        <div class="product-status status-future"><span class="dot-sm"></span> Future</div>
+        <h3 class="product-name">Care Pathways</h3>
+        <p class="product-sub">Action, not dashboards</p>
+        <p class="product-desc">Workflow-ready decision support outputs for primary care and community health networks that translate endocrine signals into follow-up prioritization and low-cost prevention before complications escalate.</p>
+        <ul class="product-features">
+          <li><span class="feat-dot feat-gold"></span>Follow-up prioritization and outreach lists</li>
+          <li><span class="feat-dot feat-gold"></span>Interpretable early warning flags</li>
+          <li><span class="feat-dot feat-gold"></span>Aligned with Kenya's Social Health Authority framework</li>
+        </ul>
+        <div class="product-footer">
+          <span class="product-footer-note">For clinics and CHW networks</span>
+          <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#105;&#110;&#102;&#111;&#64;&#101;&#110;&#100;&#111;&#109;&#97;&#116;&#114;&#105;&#120;&#108;&#97;&#98;&#115;&#46;&#116;&#101;&#99;&#104;?subject=Care%20Pathways%20interest" class="btn-product btn-product-gold">Express interest</a>
+        </div>
+      </article>
 
-      // Close drawer on link tap
-      drawer.querySelectorAll("a").forEach((a) => {
-        a.addEventListener("click", () => {
-          drawer.classList.remove("open");
-          btn.setAttribute("aria-expanded", "false");
-        });
-      });
-    </script>
-  </body>
-</html>
+    </div>
+  </div>
+</section>
 
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <div class="wrap">
+    <p class="section-label">How It Works</p>
+    <h2 class="section-heading">From signals to anticipatory care</h2>
+    <div class="how-steps reveal">
+      <div class="how-step">
+        <div class="step-num-wrap"><div class="step-num">01</div><div class="step-label">Sense</div></div>
+        <p class="step-desc">Women log a small set of daily signals — pain, energy, dominant symptom in under 60 seconds via app or SMS/USSD. Optional wearable proxies increase signal confidence where available.</p>
+      </div>
+      <div class="how-step">
+        <div class="step-num-wrap"><div class="step-num">02</div><div class="step-label">Learn</div></div>
+        <p class="step-desc">The system learns each person's individual baseline — their endocrine fingerprint and detects meaningful drift from it, rather than comparing against population averages that erase normal variation.</p>
+      </div>
+      <div class="how-step">
+        <div class="step-num-wrap"><div class="step-num">03</div><div class="step-label">Act</div></div>
+        <p class="step-desc">Interpretable pattern summaries help users anticipate difficult days and articulate their experience clinically. At scale, de-identified cohort signals enable health systems to intervene earlier.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION -->
+<section class="mission" id="mission">
+  <div class="wrap">
+    <p class="section-label">Mission</p>
+    <h2 class="section-heading">Built from lived experience. Designed for dignity.</h2>
+    <div class="mission-inner">
+      <div class="mission-values reveal">
+        <div class="value-card">
+          <div class="value-card-top">
+            <span class="value-icon pink"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="5" stroke="#E8186D" stroke-width="1.5"/><circle cx="8" cy="8" r="2" fill="#E8186D"/></svg></span>
+            <span class="value-title">Treat cycles as signal, not noise</span>
+          </div>
+          <p class="value-desc">Women's hormonal fluctuations have historically been excluded from clinical baselines. We learn individualized patterns and distinguish normal variation from meaningful drift.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-card-top">
+            <span class="value-icon teal"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8 3v10" stroke="#00C9A7" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+            <span class="value-title">Build for digital exclusion first</span>
+          </div>
+          <p class="value-desc">SMS/USSD is a first-class channel, not an afterthought. Anticipatory insight should reach women where they are, not only where connectivity is strong.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-card-top">
+            <span class="value-icon gold"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2l1.8 3.6L14 6.3l-3 2.9.7 4.1L8 11.1l-3.7 2.2.7-4.1-3-2.9 4.2-.7L8 2z" stroke="#F2B84B" stroke-width="1.3" fill="none"/></svg></span>
+            <span class="value-title">Close the signal-to-action gap</span>
+          </div>
+          <p class="value-desc">We don't produce dashboards that sit unused. Every output is designed to support a concrete next step for individuals, clinicians, and health programs alike.</p>
+        </div>
+      </div>
+      <div class="mission-statement reveal">
+        <blockquote>"We start with women because cyclical and life-stage endocrine transitions create clear longitudinal patterns and carry the largest unmet burden in preventive care."</blockquote>
+        <cite>EndoMatrix Labs &#183; Founding Principle</cite>
+        <p style="margin-top:24px;font-size:14px;font-weight:300;color:var(--mist);line-height:1.7;">A world where endocrine transitions are not dismissed, and where early physiological drift becomes a trusted signal for prevention.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRACTION -->
+<section class="traction" id="traction">
+  <div class="wrap">
+    <p class="section-label">Validation</p>
+    <h2 class="section-heading">Grounded in discovery, not assumption.</h2>
+    <p class="section-body">Every design decision traces back to real conversations with the women this is built for.</p>
+    <div class="traction-grid reveal">
+      <div class="traction-stat">
+        <div class="traction-num" style="color:var(--pink)">15</div>
+        <p class="traction-stat-label">in-depth discovery interviews completed</p>
+      </div>
+      <div class="traction-stat">
+        <div class="traction-num" style="color:var(--teal)">2</div>
+        <p class="traction-stat-label">cohorts: menstrual pain (20&#8211;35) and perimenopause (50+)</p>
+      </div>
+      <div class="traction-stat">
+        <div class="traction-num" style="color:var(--gold)">3</div>
+        <p class="traction-stat-label">geographies: urban Nairobi, rural Western, remote Eastern Kenya</p>
+      </div>
+      <div class="traction-stat">
+        <div class="traction-num" style="color:var(--white)">50</div>
+        <p class="traction-stat-label">beta users targeted for Q1 2026 closed pilot</p>
+      </div>
+      <div class="traction-insight">
+        <div class="insight-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="9" r="5" stroke="#E8186D" stroke-width="1.5"/><path d="M6 20c0-3.3 2.2-6 5-6s5 2.7 5 6" stroke="#E8186D" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div>
+          <p class="insight-label">Key research insight</p>
+          <p class="insight-body">Discovery interviews revealed a <strong>pain-relief-delay loop</strong>: during debilitating episodes, women plan to seek care — but once symptoms ease, life catches up and they postpone until the next cycle. This repeats indefinitely. EndoMatrix's low-burden, continuous logging is designed specifically to break this cycle, keeping the signal visible between episodes and building the longitudinal record women need for clinical conversations.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="wrap">
+    <p class="section-label">Contact</p>
+    <h2 class="section-heading">Let's build anticipatory care that actually works.</h2>
+    <p class="section-body">If you work in primary care, public health, insurance, research, or sensing hardware, we would love to hear from you.</p>
+    <div class="contact-grid reveal">
+      <div class="contact-card">
+        <p class="section-label">Get in touch</p>
+        <h3>No forms. No friction.</h3>
+        <p>We are a small, focused team. Reach out directly and we will reply with next steps.</p>
+        <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#105;&#110;&#102;&#111;&#64;&#101;&#110;&#100;&#111;&#109;&#97;&#116;&#114;&#105;&#120;&#108;&#97;&#98;&#115;&#46;&#116;&#101;&#99;&#104;" class="contact-email">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="2" y="4" width="14" height="10" rx="2" stroke="#00C9A7" stroke-width="1.4"/><path d="M2 6l7 5 7-5" stroke="#00C9A7" stroke-width="1.4" stroke-linecap="round"/></svg>
+          &#105;&#110;&#102;&#111;&#64;&#101;&#110;&#100;&#111;&#109;&#97;&#116;&#114;&#105;&#120;&#108;&#97;&#98;&#115;&#46;&#116;&#101;&#99;&#104;
+        </a>
+      </div>
+      <div class="contact-card">
+        <p class="section-label">Partnership interests</p>
+        <h3>Pick a starting point.</h3>
+        <div class="partnership-links">
+          <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#105;&#110;&#102;&#111;&#64;&#101;&#110;&#100;&#111;&#109;&#97;&#116;&#114;&#105;&#120;&#108;&#97;&#98;&#115;&#46;&#116;&#101;&#99;&#104;?subject=Join%20EndoMatrix%20Core%20waitlist" class="partner-link">Join the Core beta waitlist <span>&#8594;</span></a>
+          <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#105;&#110;&#102;&#111;&#64;&#101;&#110;&#100;&#111;&#109;&#97;&#116;&#114;&#105;&#120;&#108;&#97;&#98;&#115;&#46;&#116;&#101;&#99;&#104;?subject=Pilot%20partner%20for%20Sentinel" class="partner-link">Pilot partner — clinic or county program <span>&#8594;</span></a>
+          <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#105;&#110;&#102;&#111;&#64;&#101;&#110;&#100;&#111;&#109;&#97;&#116;&#114;&#105;&#120;&#108;&#97;&#98;&#115;&#46;&#116;&#101;&#99;&#104;?subject=Payer%20or%20insurer%20prevention%20program" class="partner-link">Payer or insurer prevention program <span>&#8594;</span></a>
+          <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#105;&#110;&#102;&#111;&#64;&#101;&#110;&#100;&#111;&#109;&#97;&#116;&#114;&#105;&#120;&#108;&#97;&#98;&#115;&#46;&#116;&#101;&#99;&#104;?subject=Hardware%20or%20sensor%20integration" class="partner-link">Hardware or sensor integration <span>&#8594;</span></a>
+          <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#105;&#110;&#102;&#111;&#64;&#101;&#110;&#100;&#111;&#109;&#97;&#116;&#114;&#105;&#120;&#108;&#97;&#98;&#115;&#46;&#116;&#101;&#99;&#104;?subject=General%20inquiry" class="partner-link">General inquiry <span>&#8594;</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a class="brand" href="#top" aria-label="EndoMatrix Labs home">
+          <svg class="brand-mark" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="ftr-arc" x1="4" y1="0" x2="44" y2="48" gradientUnits="userSpaceOnUse"><stop stop-color="#E8186D"/><stop offset="1" stop-color="#00C9A7"/></linearGradient>
+              <linearGradient id="ftr-sig" x1="4" y1="24" x2="44" y2="24" gradientUnits="userSpaceOnUse"><stop stop-color="#E8186D"/><stop offset="1" stop-color="#00C9A7"/></linearGradient>
+            </defs>
+            <path d="M 38 33 A 18 18 0 1 0 38 15" stroke="url(#ftr-arc)" stroke-width="2.8" stroke-linecap="round" fill="none"/>
+            <path d="M 11 27 L 16 22 L 21 25 L 26 19 L 31 23 L 36 17" stroke="url(#ftr-sig)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <circle cx="36" cy="17" r="3.5" fill="#00C9A7"/>
+            <circle cx="36" cy="17" r="6.5" stroke="#00C9A7" stroke-width="1" fill="none" opacity="0.35"/>
+          </svg>
+          <span class="brand-text">
+            <span class="brand-name">EndoMatrix Labs</span>
+            <span class="brand-tagline">Endocrine Intelligence</span>
+          </span>
+        </a>
+        <p>Building hormone-aware sensing and decision support for anticipatory health. Women-first pilot. Population-ready platform.</p>
+      </div>
+      <div class="footer-links-grid">
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="#mission">Mission</a>
+          <a href="#traction">Traction</a>
+          <a href="#contact">Careers</a>
+        </div>
+        <div class="footer-col">
+          <h4>Products</h4>
+          <a href="#products">Core</a>
+          <a href="#products">Sentinel</a>
+          <a href="#products">Care Pathways</a>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <a href="#top">Privacy</a>
+          <a href="#top">Terms</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&#169; <span id="year"></span> EndoMatrix Labs. All rights reserved.</span>
+      <span>Built mobile-first &#183; No accounts required &#183; Kenya pilot 2026</span>
+    </div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Mobile menu
+  const menuBtn = document.getElementById('menuBtn');
+  const mobileNav = document.getElementById('mobileNav');
+  menuBtn.addEventListener('click', () => {
+    const isOpen = mobileNav.classList.toggle('open');
+    menuBtn.classList.toggle('open', isOpen);
+    menuBtn.setAttribute('aria-expanded', String(isOpen));
+  });
+  mobileNav.querySelectorAll('.mobile-link').forEach(a => {
